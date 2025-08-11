@@ -4,8 +4,147 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Sa Re Ga Ma Studios | Music Production & recording</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<!-- Skip to Content Link -->
+    <a href="#main-content" class="skip-link">Skip to Content</a>
+
+    <!-- Header -->
+    <header>
+        <a href="index.html" class="logo" aria-label="Sa Re Ga Ma Studios Home"><i class="fas fa-music" aria-hidden="true"></i>Sa Re <span>Ga Ma</span></a>
+        <button class="menu-toggle" aria-label="Toggle navigation menu"><i class="fas fa-bars"></i></button>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+     <!-- Main Content -->
+    <main id="main-content">
+        <section class="section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Contact Information</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                        <div class="contact-text">
+                            <h4>Location</h4>
+                            <p>10 Rosebery Avenue, Holborn, London, EC1R 4TF </p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="contact-text">
+                            <h4>Phone</h4>
+                            <p><a href="tel:+44 28 7012 3456">+44 28 7012 3456</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                        <div class="contact-text">
+                            <h4>Email</h4>
+                            <p><a href="mailto:info@saregama.com">info@saregama.com</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon"><i class="fas fa-clock"></i></div>
+                        <div class="contact-text">
+                            <h4>Working Hours</h4>
+                            <p>Monday - Friday: 9AM - 7PM<br>Saturday: 10AM - 5PM</p>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 2rem;">
+                    <iframe
+  width="600"
+  height="450"
+  frameborder="0"
+  style="border:0"
+  loading="lazy"
+  allowfullscreen
+  
+src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.4898924399204!2d-0.11410432417697952!3d51.522573909595685!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761b4ed4849d71%3A0x905ec2bd752b3aa8!2sQA%20Higher%20Education%20London%2C%20Rosebery%20Avenue!5e0!3m2!1sen!2suk!4v1754911767842!5m2!1sen!2suk" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+</iframe>
+
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send Us a Message</h3>
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" class="form-control" required aria-required="true">
+                            <div class="error-message" id="nameError">Please enter your name</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" class="form-control" required aria-required="true">
+                            <div class="error-message" id="emailError">Please enter a valid email address</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control" aria-label="Phone number (optional)">
+                            <div class="error-message" id="phoneError">Please enter a valid phone number</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">Service Interested In</label>
+                            <select id="service" class="form-control" aria-label="Select service you're interested in">
+                                <option value="">Select a service</option>
+                                <option value="production">Music Production</option>
+                                <option value="recording">Recording</option>
+                                <option value="mixing">Mixing & Mastering</option>
+                                <option value="scoring">Scoring for Media</option>
+                                <option value="post">Audio Post-Production</option>
+                                <option value="education">Music Education</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" class="form-control" required aria-required="true"></textarea>
+                            <div class="error-message" id="messageError">Please enter your message</div>
+                        </div>
+                        <button type="submit" class="submit-btn">Send Message</button>
+                        <div class="form-success" id="formSuccess">
+                            <p>Thank you for your message! We'll get back to you soon.</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <a href="index.html" class="logo" aria-label="Sa Re Ga Ma Studios Home"><i class="fas fa-music" aria-hidden="true"></i>Sa Re <span>Ga Ma</span></a>
+            </div>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                <a href="#" aria-label="Spotify"><i class="fab fa-spotify"></i></a>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="contact.html">Contact</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+            </div>
+            <p class="copyright">© 2023 Sa Re Ga Ma Studios. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+     <script src="main.js"></script>
     
+
 </body>
 </html>
