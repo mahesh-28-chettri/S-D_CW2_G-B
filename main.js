@@ -84,48 +84,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Calendar and Time Slot Selection (for contact page)
-    const calendarDays = document.querySelectorAll('.calendar-day:not(.inactive):not(.booked)');
-    if (calendarDays.length > 0) {
-        calendarDays.forEach(day => {
-            day.addEventListener('click', function() {
-                document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                this.classList.add('selected');
-                // In a real app, you would fetch available times for this date
-            });
-        });
-    }
-
-    const timeSlots = document.querySelectorAll('.time-slot:not(.booked)');
-    if (timeSlots.length > 0) {
-        timeSlots.forEach(slot => {
-            slot.addEventListener('click', function() {
-                document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
-    }
 
     // Testimonial Slider (for services page)
     let currentTestimonial = 0;
     const testimonials = [
         {
             text: "Sa Re Ga Ma Studios transformed my EP into something beyond my expectations. Their attention to detail and creative input took my songs to the next level.",
-            name: "Sarah Johnson",
+            name: "Dikshya Rai",
             role: "Independent Artist",
-            image: "https://randomuser.me/api/portraits/women/32.jpg"
+            image: "images/Dikshya Rai.jpeg"
         },
         {
             text: "Working with their team on our film score was a dream. They understood the emotional tone we were going for and delivered beyond our expectations.",
-            name: "Michael Chen",
+            name: "Jaya Kishan Basnet",
             role: "Film Director",
-            image: "https://randomuser.me/api/portraits/men/45.jpg"
+            image: "images/Jay Kishan Basnet.jpeg"
         },
         {
             text: "The best mastering I've ever had for my tracks. They made my music sound professional and ready for all platforms.",
-            name: "DJ Nova",
+            name: "DJ Ifti",
             role: "Electronic Producer",
-            image: "https://randomuser.me/api/portraits/women/68.jpg"
+            image: "images/man.jpg"
         }
     ];
 
