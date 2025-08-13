@@ -108,7 +108,7 @@ nav ul li a.active::after {
 }
 
 .menu-toggle {
-    display: block;
+    display: none;
     cursor: pointer;
     font-size: 1.5rem;
     background: none;
