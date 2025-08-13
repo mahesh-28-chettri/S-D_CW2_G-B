@@ -107,6 +107,15 @@ nav ul li a.active::after {
     width: 100%;
 }
 
+.menu-toggle {
+    display: block;
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--light);
+}
+
 /* Page Content */
 main {
     padding-top: 80px;
