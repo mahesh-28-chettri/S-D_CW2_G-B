@@ -1,198 +1,223 @@
-// main.js
-document.addEventListener('DOMContentLoaded', function() {
+(function ($) {
+  $(function () {
     // Mobile Menu Toggle
-    const menuToggle = document.querySelector('.menu-toggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', function() {
-            const nav = document.querySelector('nav');
-            nav.classList.toggle('active');
-            this.querySelector('i').classList.toggle('fa-times');
-            this.setAttribute('aria-expanded', nav.classList.contains('active'));
+    $('.menu-toggle').on('click', function () {
+      const $nav = $('nav');
+      $nav.toggleClass('active');
+      $(this).find('i').toggleClass('fa-times');
+      $(this).attr('aria-expanded', $nav.hasClass('active'));
+    });
+
+    // Set active nav link
+      function setActiveNavLink() {
+      const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
+      $('.nav-link')
+        .removeClass('active')
+        .each(function () {
+          if ($(this).data('page') === currentPage) {
+            $(this).addClass('active');
+          }
         });
     }
-
-    // Set active nav link based on current page
-    function setActiveNavLink() {
-        const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'index';
-        const navLinks = document.querySelectorAll('.nav-link');
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('data-page') === currentPage) {
-                link.classList.add('active');
-            }
-        });
-    }
-
+    
     setActiveNavLink();
+    // Form Validation
+    $('#contactForm').on('submit', function (e) {
+      e.preventDefault();
+      let isValid = true;
 
-    // Form Validation (for contact page)
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            let isValid = true;
+      const name = $('#name').val()?.trim() || '';
+      if (name === '') {
+        $('#nameError').show();
+        isValid = false;
+      } else {
+        $('#nameError').hide();
+      }
 
-            // Validate name
-            const name = document.getElementById('name').value.trim();
-            if (name === '') {
-                document.getElementById('nameError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('nameError').style.display = 'none';
-            }
+      const email = $('#email').val()?.trim() || '';
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        $('#emailError').show();
+        isValid = false;
+      } else {
+        $('#emailError').hide();
+      }
 
-            // Validate email
-            const email = document.getElementById('email').value.trim();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                document.getElementById('emailError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('emailError').style.display = 'none';
-            }
+      const phone = $('#phone').val()?.trim() || '';
+      if (phone !== '' && !/^[\d\s\-()+]{10,}$/.test(phone)) {
+        $('#phoneError').show();
+        isValid = false;
+      } else {
+        $('#phoneError').hide();
+      }
 
-            // Validate phone (optional but must be valid if provided)
-            const phone = document.getElementById('phone').value.trim();
-            if (phone !== '' && !/^[\d\s\-()+]{10,}$/.test(phone)) {
-                document.getElementById('phoneError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('phoneError').style.display = 'none';
-            }
+      const message = $('#message').val()?.trim() || '';
+      if (message === '') {
+        $('#messageError').show();
+        isValid = false;
+      } else {
+        $('#messageError').hide();
+      }
 
-            // Validate message
-            const message = document.getElementById('message').value.trim();
-            if (message === '') {
-                document.getElementById('messageError').style.display = 'block';
-                isValid = false;
-            } else {
-                document.getElementById('messageError').style.display = 'none';
-            }
+      if (isValid) {
+        $('#formSuccess').show();
+        this.reset();
+        setTimeout(() => $('#formSuccess').hide(), 5000);
+      }
+    });
 
-            if (isValid) {
-                // Here you would typically send the data to a server
-                // For now, we'll simulate a successful submission
-                document.getElementById('formSuccess').style.display = 'block';
-                this.reset();
-
-                // Hide success message after 5 seconds
-                setTimeout(() => {
-                    document.getElementById('formSuccess').style.display = 'none';
-                }, 5000);
-            }
-        });
-    }
-
-
-    // Testimonial Slider (for services page)
+    
+    // Testimonial Slider (hardened)
     let currentTestimonial = 0;
     const testimonials = [
-        {
-            text: "Sa Re Ga Ma Studios transformed my EP into something beyond my expectations. Their attention to detail and creative input took my songs to the next level.",
-            name: "Dikshya Rai",
-            role: "Independent Artist",
-            image: "images/Dikshya Rai.jpeg"
-        },
-        {
-            text: "Working with their team on our film score was a dream. They understood the emotional tone we were going for and delivered beyond our expectations.",
-            name: "Jaya Kishan Basnet",
-            role: "Film Director",
-            image: "images/Jay Kishan Basnet.jpeg"
-        },
-        {
-            text: "The best mastering I've ever had for my tracks. They made my music sound professional and ready for all platforms.",
-            name: "DJ Ifti",
-            role: "Electronic Producer",
-            image: "images/man.jpg"
-        }
+      {
+        text:
+          'Sa Re Ga Ma Studios transformed my EP into something beyond my expectations. Their attention to detail and creative input took my songs to the next level.',
+        name: 'Dikshya Rai',
+        role: 'Independent Artist',
+        image: 'images/Dikshya Rai.jpeg'
+      },
+      {
+        text:
+          'Working with their team on our film score was a dream. They understood the emotional tone we were going for and delivered beyond our expectations.',
+        name: 'Jaya Kishan Basnet',
+        role: 'Film Director',
+        image: 'images/Jay Kishan Basnet.jpeg'
+      },
+      {
+        text:
+          "The best mastering I've ever had for my tracks. They made my music sound professional and ready for all platforms.",
+        name: 'DJ Ifti',
+        role: 'Electronic Producer',
+        image: 'images/man.jpg'
+      }
     ];
 
+    const $testimonialsWrap = $('.testimonials').first();
+    if (!$testimonialsWrap.length) {
+      console.warn('[Testimonials] .testimonials container not found on this page.');
+    }
+
+    // Ensure there is a slide container to inject into
+    let $slide = $testimonialsWrap.find('.testimonial-slide').first();
+    if ($testimonialsWrap.length && !$slide.length) {
+      $slide = $('<div class="testimonial-slide"></div>').appendTo($testimonialsWrap);
+      console.warn('[Testimonials] .testimonial-slide not found; created one automatically.');
+    }
+
     function updateTestimonial(index) {
-        const testimonial = testimonials[index];
-        const slide = document.querySelector('.testimonial-slide');
-        
-        if (slide) {
-            slide.innerHTML = `
-                <div class="client-image">
-                    <img src="${testimonial.image}" alt="${testimonial.name}">
-                </div>
-                <p class="testimonial-text">${testimonial.text}</p>
-                <p class="client-name">${testimonial.name}</p>
-                <p class="client-role">${testimonial.role}</p>
-            `;
-        }
+      if (!$slide || !$slide.length) return;
+      const total = testimonials.length;
+      const t = testimonials[index];
+
+      // ARIA for accessibility
+      $testimonialsWrap.attr('aria-live', 'polite');
+      $slide
+        .attr({
+          role: 'group',
+          'aria-roledescription': 'slide',
+          'aria-label': `${index + 1} of ${total}`
+        })
+        .html(
+          `
+          <div class="client-image">
+              <img src="${t.image}" alt="${t.name}">
+          </div>
+          <p class="testimonial-text">${t.text}</p>
+          <p class="client-name">${t.name}</p>
+          <p class="client-role">${t.role}</p>
+        `
+        );
     }
 
-    const testimonialBtns = document.querySelectorAll('.testimonials .btn');
-    if (testimonialBtns.length > 0) {
-        testimonialBtns.forEach((btn, i) => {
-            btn.addEventListener('click', function() {
-                if (i === 0) {
-                    // Previous button
-                    currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
-                } else {
-                    // Next button
-                    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-                }
-                updateTestimonial(currentTestimonial);
-            });
+    if ($testimonialsWrap.length) {
+      $testimonialsWrap.on('click', '[data-action="prev"], .prev, .btn-prev', function (e) {
+        e.preventDefault();
+        currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+        updateTestimonial(currentTestimonial);
+      });
+
+      $testimonialsWrap.on('click', '[data-action="next"], .next, .btn-next', function (e) {
+        e.preventDefault();
+        currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+        updateTestimonial(currentTestimonial);
+      });
+
+      const $genericBtns = $testimonialsWrap.find('.btn');
+      if ($genericBtns.length === 2) {
+        $genericBtns.eq(0).on('click', function (e) {
+          e.preventDefault();
+          currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+          updateTestimonial(currentTestimonial);
         });
-    }
+        $genericBtns.eq(1).on('click', function (e) {
+          e.preventDefault();
+          currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+          updateTestimonial(currentTestimonial);
+        });
+      }
 
-    // Initialize first testimonial
-    updateTestimonial(0);
+      // Initialize first testimonial
+      updateTestimonial(0);
+    }
 
     // Animation on scroll
     function animateOnScroll() {
-        const elements = document.querySelectorAll('.service-card, .about-image, .about-text, .work-card, .team-member, .equipment-card');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight / 1.3;
-            
-            if (elementPosition < screenPosition) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
+      $('.service-card, .about-image, .about-text, .work-card, .team-member, .equipment-card').each(function () {
+        const elementTop = this.getBoundingClientRect().top;
+        const screenPos = window.innerHeight / 1.3;
+        if (elementTop < screenPos) {
+          $(this).css({
+            opacity: '1',
+            transform: 'translateY(0)'
+          });
+        }
+      });
     }
 
-    // Set initial state for animated elements
-    const animatedElements = document.querySelectorAll('.service-card, .about-image, .about-text, .work-card, .team-member, .equipment-card');
-    if (animatedElements.length > 0) {
-        animatedElements.forEach(element => {
-            element.style.opacity = '0';
-            element.style.transform = 'translateY(20px)';
-            element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-        });
-    }
+    $('.service-card, .about-image, .about-text, .work-card, .team-member, .equipment-card').css({
+      opacity: '0',
+      transform: 'translateY(20px)',
+      transition: 'opacity 0.5s ease, transform 0.5s ease'
+    });
 
-    window.addEventListener('scroll', animateOnScroll);
+    $(window).on('scroll', animateOnScroll);
     animateOnScroll();
 
     // Header scroll effect
-    window.addEventListener('scroll', function() {
-        const header = document.querySelector('header');
-        if (header) {
-            if (window.scrollY > 100) {
-                header.style.padding = '0.5rem 5%';
-                header.style.background = 'rgba(26, 26, 46, 0.95)';
-            } else {
-                header.style.padding = '1rem 5%';
-                header.style.background = 'rgba(26, 26, 46, 0.9)';
-            }
-        }
+    $(window).on('scroll', function () {
+      if (window.scrollY > 100) {
+        $('header').css({
+          padding: '0.5rem 5%',
+          background: 'rgba(26, 26, 46, 0.95)'
+        });
+      } else {
+        $('header').css({
+          padding: '1rem 5%',
+          background: 'rgba(26, 26, 46, 0.9)'
+        });
+      }
     });
 
     // Focus styles for accessibility
-    document.addEventListener('keyup', function(e) {
-        if (e.key === 'Tab') {
-            document.documentElement.classList.add('keyboard-nav');
-        }
+   
+    $(document).on('keyup', function (e) {
+      if (e.key === 'Tab') {
+        $('html').addClass('keyboard-nav');
+      }
     });
 
-    document.addEventListener('mousedown', function() {
-        document.documentElement.classList.remove('keyboard-nav');
+    $(document).on('mousedown', function () {
+      $('html').removeClass('keyboard-nav');
     });
-});
+
+   
+    // Sanity check
+    
+    if (!window.jQuery) {
+      console.error('jQuery is not loaded. Make sure it is included before main.js');
+    } else {
+      // console.log('jQuery v' + $.fn.jquery + ' initialized');
+    }
+  });
+})(jQuery);

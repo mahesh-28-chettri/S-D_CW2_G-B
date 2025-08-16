@@ -752,7 +752,7 @@ footer {
 .form-control:focus {
     outline: none;
     border-color: var(--primary);
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(49, 45, 45, 0.865);
 }
 
 textarea.form-control {
